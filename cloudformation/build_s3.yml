@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: Private
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+    DeletionPolicy: Retain
+
+Outputs:
+  BuildBucket:
+    Value: !Ref S3Bucket
+    Description: Bucket ref
+    Export:
+      Name: buildbucket-bucket
+
+  BuildBucketARN:
+    Value: !GetAtt S3Bucket.Arn
